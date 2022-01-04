@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class {{ class }} extends Migration
+class AlterUsersTableAddCompanyColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class {{ class }} extends Migration
      */
     public function up()
     {
-        Schema::create('{{ table }}', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('tenant_id');
-            $table->unsignedBigInteger('store_id');
-
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->unsignedBigInteger('tentant_id')->nullable();
         });
     }
 
@@ -29,6 +25,8 @@ class {{ class }} extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('{{ table }}');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('tenant_id');
+        });
     }
 }

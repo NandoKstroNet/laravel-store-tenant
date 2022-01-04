@@ -1,10 +1,10 @@
 <?php
 
-namespace {{ factoryNamespace }};
+namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class {{ factory }}Factory extends Factory
+class ProductsFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,7 +14,7 @@ class {{ factory }}Factory extends Factory
     public function definition()
     {
         return [
-            'tenant_id' => null,
+            'company_id' => null,
             'store_id'   => null
         ];
     }
