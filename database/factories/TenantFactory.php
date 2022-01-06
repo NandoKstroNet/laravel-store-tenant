@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ProductsFactory extends Factory
+class TenantFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,8 +14,8 @@ class ProductsFactory extends Factory
     public function definition()
     {
         return [
-            'company_id' => null,
-            'store_id'   => null
+            'contract' => $this->faker->uuid,
+            'is_active' => 1
         ];
     }
 }

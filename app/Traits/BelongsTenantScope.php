@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\Tenant;
 use App\Scopes\TenantScope;
 
 trait BelongsTenantScope
@@ -14,5 +15,10 @@ trait BelongsTenantScope
     protected static function booted()
     {
         static::addGlobalScope(new TenantScope());
+    }
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
     }
 }

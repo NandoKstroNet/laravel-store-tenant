@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class CategoryFactory extends Factory
+class ProductFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,12 +14,13 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
-        $categoryName = $this->faker->word;
-
+        $nameProduct = $this->faker->word;
         return [
-            'name' => $categoryName,
+            'name' => $nameProduct,
             'description' => $this->faker->sentence,
-            'slug' => Str::slug($categoryName)
+            'price'  => $this->faker->numberBetween(1, 5000),
+            'body'   => $this->faker->paragraphs(5, true),
+            'slug'   => Str::slug($nameProduct)
         ];
     }
 }

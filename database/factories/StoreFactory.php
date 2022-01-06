@@ -14,8 +14,11 @@ class StoreFactory extends Factory
     public function definition()
     {
         return [
-            'company_id' => null,
-            'store_id'   => null
+            'name' => $this->faker->word,
+            'description' => $this->faker->sentence,
+            'logo' => $this->faker->imageUrl(180, 180),
+            'cover' => $this->faker->imageUrl(1280, 720),
+            'subdomain' => $this->faker->word
         ];
     }
 }

@@ -6,7 +6,7 @@ use App\Traits\BelongsTenantScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Product extends Model
 {
     use HasFactory, BelongsTenantScope;
 
@@ -15,8 +15,8 @@ class Category extends Model
         return $this->belongsTo(Store::class);
     }
 
-    public function products()
+    public function categories()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Category::class);
     }
 }
