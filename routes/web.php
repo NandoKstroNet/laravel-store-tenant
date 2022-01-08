@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::domain('{domain}.localhost')->group(function() {
+    Route::get('/', [\App\Http\Controllers\Front\StoresController::class, 'index']);
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -20,5 +25,11 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::prefix('admin')->middleware('auth')->group(function() {
+    Route::resource('products', \App\Http\Controllers\ProductsController::class);
+    Route::resource('categories', \App\Http\Controllers\CategoriesController::class);
+});
+
 
 require __DIR__.'/auth.php';

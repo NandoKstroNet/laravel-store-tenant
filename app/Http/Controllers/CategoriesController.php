@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Product;
 use App\Models\Store;
 use Illuminate\Http\Request;
 
-class ProductsController extends Controller
+class CategoriesController extends Controller
 {
-    public function __construct(private Product $product)
+    public function __construct(private Category $category)
     {
     }
 
@@ -20,9 +19,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = $this->product->paginate(10);
+        $categories = $this->category->paginate(10);
 
-        return view('admin.products.index', compact('products'));
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -30,11 +29,9 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Category $category)
+    public function create()
     {
-        $categories = $category->all(['id', 'name']);
-
-        return view('admin.products.create', compact('categories'));
+        return view('admin.categories.create');
     }
 
     /**
@@ -47,13 +44,11 @@ class ProductsController extends Controller
     {
         $data = $request->all();
 
-        $product = $store->first()->products()->create($data);
+        $store->first()->categories()->create($data);
 
-        $product->categories()->sync($request->categories);
+        session()->flash('message', ['type' => 'success', 'body' => 'Sucesso ao cadastrar categoria']);
 
-        session()->flash('message', ['type' => 'success', 'body' => 'Sucesso ao cadastrar produto']);
-
-        return redirect()->route('products.index');
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -73,12 +68,11 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id, Category $category)
+    public function edit($id)
     {
-        $categories = $category->all(['id', 'name']);
-        $product = $this->product->findOrFail($id);
+        $category = $this->category->findOrFail($id);
 
-        return view('admin.products.edit', compact('product', 'categories'));
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -90,12 +84,12 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = $this->product->findOrFail($id);
-        $product->update($request->all());
+        $category = $this->category->findOrFail($id);
+        $category->update($request->all());
 
-        session()->flash('message', ['type' => 'success', 'body' => 'Sucesso ao atualizar produto']);
+        session()->flash('message', ['type' => 'success', 'body' => 'Sucesso ao atualizar categoria']);
 
-        return redirect()->route('products.edit', $product);
+        return redirect()->route('categories.edit', $category);
     }
 
     /**
@@ -106,12 +100,12 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        $product = $this->product->findOrFail($id);
+        $category = $this->category->findOrFail($id);
 
-        $product->delete();
+        $category->delete();
 
-        session()->flash('message', ['type' => 'success', 'body' => 'Sucesso ao remover produto']);
+        session()->flash('message', ['type' => 'success', 'body' => 'Sucesso ao remover categoria']);
 
-        return redirect()->route('products.index');
+        return redirect()->route('categories.index');
     }
 }

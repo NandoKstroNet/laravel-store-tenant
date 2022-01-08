@@ -12,9 +12,14 @@ trait BelongsTenantScope
      *
      * @return void
      */
-    protected static function booted()
+    protected static function bootBelongsTenantScope()
     {
         static::addGlobalScope(new TenantScope());
+
+        static::creating(function($model) {
+            if(session()->has('tenant'))
+                $model->tenant_id = session()->get('tenant');
+        });
     }
 
     public function tenant()

@@ -29,6 +29,8 @@
 
             <!-- Page Content -->
             <main>
+                <x-message/>
+
                 {{ $slot }}
             </main>
         </div>

@@ -18,7 +18,7 @@ class StoreFactory extends Factory
             'description' => $this->faker->sentence,
             'logo' => $this->faker->imageUrl(180, 180),
             'cover' => $this->faker->imageUrl(1280, 720),
-            'subdomain' => $this->faker->word
+            'subdomain' => $this->faker->slug
         ];
     }
 }

@@ -18,10 +18,11 @@ class CreateStoresTable extends Migration
             $table->unsignedBigInteger('tenant_id');
 
             $table->string('name');
-            $table->string('description');
-            $table->string('logo');
-            $table->string('cover');
-            $table->string('subdomain');
+            $table->string('description')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('cover')->nullable();
+
+            $table->string('subdomain')->unique();
 
             $table->timestamps();
         });

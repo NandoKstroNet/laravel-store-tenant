@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('description')->nullable();
             $table->text('body');
             $table->integer('price');
+            $table->string('image')->nullable();
 
             $table->string('slug');
 

@@ -15,6 +15,7 @@ class AlterUsersTableAddCompanyColumn extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->unsignedBigInteger('tenant_id')->nullable();
+            $table->unsignedBigInteger('store_id')->nullable();
         });
     }
 
@@ -27,6 +28,7 @@ class AlterUsersTableAddCompanyColumn extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('tenant_id');
+            $table->dropColumn('store_id');
         });
     }
 }

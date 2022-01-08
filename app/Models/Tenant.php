@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tenant extends Model
 {
-    use HasFactory, BelongsTenantScope;
+    use HasFactory;
+
+    protected $fillable = ['contract', 'is_active'];
 
     public function users()
     {
