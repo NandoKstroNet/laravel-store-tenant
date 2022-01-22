@@ -19,6 +19,8 @@ class CheckoutController extends Controller
     {
         if(!$cartService->all()) abort(500);
 
+        $cartService->clear();
+
         return redirect()->route('checkout.thanks', $subdomain);
     }
 

@@ -17,6 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::domain('{domain}.localhost')->group(function() {
     Route::get('/', [\App\Http\Controllers\Front\StoresController::class, 'index'])->name('front.store');
 
+    Route::name('sign.')->group(function() {
+        Route::get('/sign-in', [\App\Http\Controllers\Front\SignUpInController::class, 'index'])->name('index');
+        Route::post('/sign-in', [\App\Http\Controllers\Front\SignUpInController::class, 'signIn'])->name('in');
+        Route::post('/sign-up', [\App\Http\Controllers\Front\SignUpInController::class, 'signUp'])->name('up');
+    });
+    Route::get('logout', [\App\Http\Controllers\Front\SignUpInController::class, 'logout'])->name('up');
+
     Route::prefix('cart')->name('cart.')->group(function(){
         Route::get('/', [\App\Http\Controllers\Front\CartController::class, 'index'])->name('index');
         Route::get('add/{product}', [\App\Http\Controllers\Front\CartController::class, 'add'])->name('add');
@@ -24,11 +31,13 @@ Route::domain('{domain}.localhost')->group(function() {
         Route::get('cancel', [\App\Http\Controllers\Front\CartController::class, 'cancel'])->name('cancel');
     });
 
-    Route::prefix('checkout')->name('checkout.')->group(function(){
+    Route::prefix('checkout')->middleware('auth.stores')->name('checkout.')->group(function(){
         Route::get('/', [\App\Http\Controllers\Front\CheckoutController::class, 'checkout'])->name('checkout');
         Route::post('/proccess', [\App\Http\Controllers\Front\CheckoutController::class, 'proccess'])->name('proccess');
         Route::get('/thanks', [\App\Http\Controllers\Front\CheckoutController::class, 'thanks'])->name('thanks');
     });
+
+
 });
 
 Route::get('/', function () {

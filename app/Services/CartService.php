@@ -14,7 +14,8 @@ class CartService
     public function all()
     {
         $items = $this->session->get(self::CART_KEY);
-        return $items;
+
+        return !$items ? [] : $items;
     }
 
     public function add($item)

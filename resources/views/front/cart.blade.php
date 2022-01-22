@@ -14,21 +14,23 @@
                     @php $total += $item['price'] @endphp
                 </div>
             @empty
+                <div class="w-full border border-yellow-600 bg-yellow-100 px-4 py-2 rounded text-yellow-600 font-bold text-xl">Nenhum item encontrado...</div>
             @endforelse
 
-            <div class="border-t border-gray-200 flex justify-between pt-10">
-                <h5 class="text-bold text-2xl mb-4">Total</h5>
-                <p>R$ {{number_format($total, 2, ',', '.')}}</p>
-            </div>
+            @if($cart)
+                <div class="border-t border-gray-200 flex justify-between pt-10">
+                    <h5 class="text-bold text-2xl mb-4">Total</h5>
+                    <p>R$ {{number_format($total, 2, ',', '.')}}</p>
+                </div>
 
-            <div class="border-t border-gray-200 flex justify-between pt-4 mt-10">
-                <a href="{{route('cart.cancel', request('domain'))}}"
-                   class="text-xl font-bold px-4 py-2 rounded bg-red-600 text-white shadow hover:bg-red-300 transition ease-in-out delay-150 uppercase">Cancelar</a>
+                <div class="border-t border-gray-200 flex justify-between pt-4 mt-10">
+                    <a href="{{route('cart.cancel', request('domain'))}}"
+                       class="text-xl font-bold px-4 py-2 rounded bg-red-600 text-white shadow hover:bg-red-300 transition ease-in-out delay-150 uppercase">Cancelar</a>
 
-                <a href="{{route('checkout.checkout', request('domain'))}}"
-                   class="text-xl font-bold px-4 py-2 rounded bg-green-600 text-white shadow hover:bg-green-300 transition ease-in-out delay-150 uppercase">Concluir</a>
-            </div>
-
+                    <a href="{{route('checkout.checkout', request('domain'))}}"
+                       class="text-xl font-bold px-4 py-2 rounded bg-green-600 text-white shadow hover:bg-green-300 transition ease-in-out delay-150 uppercase">Concluir</a>
+                </div>
+            @endif
         </div>
     </div>
 </x-guest-layout>
